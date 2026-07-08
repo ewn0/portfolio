@@ -72,6 +72,11 @@
           scroll-snap-align: start;
           pointer-events: none;
         }
+
+        /* Accessibilité : améliorer le contraste du texte sur fond 3D dynamique */
+        h1, h2, h3, p, li, a, [data-hud], .hud-label {
+          text-shadow: 0 2px 10px rgba(11, 7, 18, 0.95), 0 1px 3px rgba(11, 7, 18, 0.9);
+        }
       </style>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
     </helmet>
@@ -80,13 +85,13 @@
 
       <div ref="{{ glRef }}" style="position:fixed; inset:0; z-index:0;"></div>
       <div
-        style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse at 50% 50%, rgba(11,7,18,0) 42%, rgba(11,7,18,0.78) 100%);">
+        style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse at 50% 50%, rgba(11,7,18,0.2) 0%, rgba(11,7,18,0.4) 45%, rgba(11,7,18,0.85) 100%);">
       </div>
 
       <div
         style="position:fixed; top:0; left:0; right:0; z-index:5; display:flex; justify-content:space-between; align-items:center; padding:22px 32px; pointer-events:none; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9A8FB0;">
-        <div style="font-weight:700; color:#EFE9F4;">E.LN — 2026</div>
-        <div>Cloud Security · Atos / Eviden</div>
+        <div class="hud-label" style="font-weight:700; color:#EFE9F4;">E.LN — 2026</div>
+        <div class="hud-label">Cloud Security · Atos / Eviden</div>
       </div>
 
       <div
@@ -106,7 +111,7 @@
           <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500;">
             Portfolio — Cybersécurité</div>
           <h1
-            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(52px, 9.5vw, 128px); line-height:0.96; letter-spacing:-0.02em; margin:26px 0 30px; color:#EFE9F4; text-shadow:0 4px 60px rgba(11,7,18,0.9);">
+            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(52px, 9.5vw, 128px); line-height:0.96; letter-spacing:-0.02em; margin:26px 0 30px; color:#EFE9F4; text-shadow:0 2px 10px rgba(11,7,18,0.95), 0 4px 60px rgba(11,7,18,0.95);">
             Ewan<br>Le Neillon</h1>
           <p
             style="font-size:clamp(15px, 1.6vw, 19px); line-height:1.75; margin:0 auto 26px; max-width:620px; color:#CFC6DE;">
@@ -486,6 +491,8 @@ class Component extends DCLogic {
       new THREE.IcosahedronGeometry(1.55, mobile ? 4 : 5),
       new THREE.ShaderMaterial({
         uniforms: this.uCore,
+        transparent: true,
+        depthWrite: false,
         vertexShader: NOISE + `
           uniform float uTime; uniform float uAmp;
           varying float vD; varying vec3 vN; varying vec3 vV; varying vec3 vLocalN;
@@ -513,7 +520,8 @@ class Component extends DCLogic {
               + uColA * fres * 0.85
               + uColA * veins * 0.4
               + uColB * scan * 1.6;
-            gl_FragColor = vec4(col, 1.0);
+            float alpha = fres * 0.4 + veins * 0.2 + scan * 0.7;
+            gl_FragColor = vec4(col, clamp(alpha, 0.05, 0.8));
           }`
       })
     );
@@ -570,7 +578,7 @@ class Component extends DCLogic {
         varying float vSeed; varying float vFade; varying float vGlow;
         void main(){
           float d = length(gl_PointCoord - 0.5);
-          float a = smoothstep(0.5, 0.12, d) * (0.32 + vSeed*0.45) * vFade;
+          float a = smoothstep(0.5, 0.12, d) * (0.16 + vSeed*0.25) * vFade;
           vec3 col = mix(uColA, uColB, vGlow);
           gl_FragColor = vec4(col, a * (1.0 + vGlow*1.4));
         }`
@@ -581,7 +589,7 @@ class Component extends DCLogic {
     const PC = mobile ? 130 : 260;
     this.plates = new THREE.InstancedMesh(
       new THREE.PlaneGeometry(0.36, 0.22),
-      new THREE.MeshBasicMaterial({ color: this.colA, transparent: true, opacity: 0.28, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false }),
+      new THREE.MeshBasicMaterial({ color: this.colA, transparent: true, opacity: 0.12, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false }),
       PC
     );
     this.plateData = [];
@@ -720,7 +728,7 @@ class Component extends DCLogic {
     }
     this.plates.instanceMatrix.needsUpdate = true;
     this.plates.material.color.copy(this.tmpA).lerp(this.tmpB, Math.min(maxProx * 1.4, 0.6));
-    this.plates.material.opacity = 0.28 + maxProx * 0.3;
+    this.plates.material.opacity = 0.12 + maxProx * 0.15;
 
     this.shells.forEach((s, k) => {
       s.rotation.y = t * (0.018 + k * 0.012); s.rotation.x = t * 0.008;
