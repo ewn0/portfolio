@@ -13,12 +13,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
+html { scroll-snap-type: y mandatory; }
 html, body { margin:0; padding:0; background:#0B0712; }
 body { overscroll-behavior:none; }
 a { color:#EFE9F4; text-decoration:none; border-bottom:1px solid rgba(239,233,244,0.35); transition:color .2s, border-color .2s; }
 a:hover { color:#FFFFFF; border-color:rgba(255,255,255,0.7); }
 ::selection { background:#EFE9F4; color:#0B0712; }
 @keyframes ewblink { 0%,100% { opacity:1; } 50% { opacity:0.15; } }
+.snap-point {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  scroll-snap-align: start;
+  pointer-events: none;
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
 </helmet>
@@ -163,7 +172,16 @@ a:hover { color:#FFFFFF; border-color:rgba(255,255,255,0.7); }
     </div>
   </div>
 
-  <div style="height:1050vh;"></div>
+  <div style="position:relative; height:1050vh; pointer-events:none;">
+    <div class="snap-point" style="top:0;"></div>
+    <div class="snap-point" style="top:178.125vh;"></div>
+    <div class="snap-point" style="top:296.875vh;"></div>
+    <div class="snap-point" style="top:415.625vh;"></div>
+    <div class="snap-point" style="top:534.375vh;"></div>
+    <div class="snap-point" style="top:653.125vh;"></div>
+    <div class="snap-point" style="top:771.875vh;"></div>
+    <div class="snap-point" style="top:950vh;"></div>
+  </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{
@@ -254,9 +272,17 @@ class Component extends DCLogic {
       const w = window.innerWidth, h = window.innerHeight;
       this.camera.aspect = w / h; this.camera.updateProjectionMatrix();
       this.renderer.setSize(w, h);
+      this.maxScroll = Math.max(document.documentElement.scrollHeight - h, 1);
     };
+    this.scrollY = window.scrollY;
+    this.onScroll = () => {
+      this.scrollY = window.scrollY;
+    };
+    this.maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+
     window.addEventListener('mousemove', this.onMove, { passive: true });
     window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
     this.t0 = performance.now();
     this.raf = requestAnimationFrame((n) => this.tick(n));
   }
@@ -266,6 +292,7 @@ class Component extends DCLogic {
     cancelAnimationFrame(this.raf);
     window.removeEventListener('mousemove', this.onMove);
     window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('scroll', this.onScroll);
     if (this.renderer) { this.renderer.dispose(); }
   }
 
@@ -494,9 +521,7 @@ class Component extends DCLogic {
     this.raf = requestAnimationFrame((n) => this.tick(n));
     const THREE = window.THREE;
 
-    const doc = document.documentElement;
-    const max = Math.max(doc.scrollHeight - window.innerHeight, 1);
-    const target = Math.min(Math.max(window.scrollY / max, 0), 1);
+    const target = Math.min(Math.max(this.scrollY / this.maxScroll, 0), 1);
     this.sp += (target - this.sp) * 0.07;
     const p = this.sp;
     const motion = Math.max(this.props.motionIntensity ?? 1, 0.05);
