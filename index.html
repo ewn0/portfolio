@@ -1,192 +1,328 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ewan Le Neillon — Portfolio Cybersécurité</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23EFE9F4'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.66 0 3 1.34 3 3 0 1.09-.59 2.04-1.46 2.56L15 17H9l1.46-4.44C9.59 12.04 9 11.09 9 10c0-1.66 1.34-3 3-3z'/%3E%3C/svg%3E">
-<script src="./support.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ewan Le Neillon — Portfolio Cybersécurité</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23EFE9F4'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.66 0 3 1.34 3 3 0 1.09-.59 2.04-1.46 2.56L15 17H9l1.46-4.44C9.59 12.04 9 11.09 9 10c0-1.66 1.34-3 3-3z'/%3E%3C/svg%3E">
+  <script src="./support.js"></script>
 </head>
+
 <body>
-<x-dc>
-<helmet>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
-<style>
-html { scroll-snap-type: y mandatory; }
-html, body { margin:0; padding:0; background:#0B0712; }
-body { overscroll-behavior:none; }
-a { color:#EFE9F4; text-decoration:none; border-bottom:1px solid rgba(239,233,244,0.35); transition:color .2s, border-color .2s; }
-a:hover { color:#FFFFFF; border-color:rgba(255,255,255,0.7); }
-::selection { background:#EFE9F4; color:#0B0712; }
-@keyframes ewblink { 0%,100% { opacity:1; } 50% { opacity:0.15; } }
-.snap-point {
-  position: absolute;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  scroll-snap-align: start;
-  pointer-events: none;
-}
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
-</helmet>
-<div ref="{{ rootRef }}" style="background:#0B0712; color:#EFE9F4; font-family:'JetBrains Mono', monospace; min-height:100vh;">
+  <x-dc>
+    <helmet>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+      <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap"
+        rel="stylesheet">
+      <style>
+        html {
+          scroll-snap-type: y mandatory;
+        }
 
-  <div ref="{{ glRef }}" style="position:fixed; inset:0; z-index:0;"></div>
-  <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse at 50% 50%, rgba(11,7,18,0) 42%, rgba(11,7,18,0.78) 100%);"></div>
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+          background: #0B0712;
+        }
 
-  <div style="position:fixed; top:0; left:0; right:0; z-index:5; display:flex; justify-content:space-between; align-items:center; padding:22px 32px; pointer-events:none; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9A8FB0;">
-    <div style="font-weight:700; color:#EFE9F4;">E.LN — 2026</div>
-    <div>Cloud Security · Atos / Eviden</div>
-  </div>
+        body {
+          overscroll-behavior: none;
+        }
 
-  <div style="position:fixed; bottom:0; left:0; right:0; z-index:5; display:flex; justify-content:space-between; align-items:flex-end; padding:22px 32px; pointer-events:none; font-size:11px; letter-spacing:0.24em; text-transform:uppercase;">
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      <div data-hud="phase" style="color:#D8D5DE; font-weight:700;">SYSTÈME STABLE</div>
-      <div style="width:180px; height:2px; background:rgba(239,233,244,0.12);">
-        <div data-hud="bar" style="width:0%; height:100%; background:linear-gradient(90deg,#8A8593,#FFFFFF);"></div>
-      </div>
-    </div>
-    <div data-hud="hint" style="color:#9A8FB0; animation:ewblink 2.4s infinite;">Scroll ↓</div>
-  </div>
+        a {
+          color: #EFE9F4;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(239, 233, 244, 0.35);
+          transition: color .2s, border-color .2s;
+        }
 
-  <div data-band="0" data-screen-label="Hero" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; pointer-events:none; padding:0 6vw; text-align:center;">
-    <div style="max-width:980px;">
-      <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500;">Portfolio — Cybersécurité</div>
-      <h1 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(52px, 9.5vw, 128px); line-height:0.96; letter-spacing:-0.02em; margin:26px 0 30px; color:#EFE9F4; text-shadow:0 4px 60px rgba(11,7,18,0.9);">Ewan<br>Le Neillon</h1>
-      <p style="font-size:clamp(15px, 1.6vw, 19px); line-height:1.75; margin:0 auto 26px; max-width:620px; color:#CFC6DE;">« Je surveille. Je détecte. Je sécurise. »</p>
-      <div style="font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:#9A8FB0;">Étudiant M1 Cybersécurité — École IT Valenciennes · Sécurité Cloud &amp; SecOps · Alternance sept. 2026</div>
-    </div>
-  </div>
+        a:hover {
+          color: #FFFFFF;
+          border-color: rgba(255, 255, 255, 0.7);
+        }
 
-  <div data-band="1" data-screen-label="À propos" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-start; pointer-events:none; padding:0 8vw; opacity:0;">
-    <div style="max-width:540px;">
-      <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:18px;">01 — À propos</div>
-      <h2 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(34px,4.4vw,58px); line-height:1.04; margin:0 0 24px; color:#EFE9F4;">Superviser le cloud.<br><span style="color:#FFFFFF;">Le garder stable.</span></h2>
-      <p style="font-size:15px; line-height:1.85; color:#CFC6DE; margin:0 0 16px;">Étudiant en Master 1 Cybersécurité à l'École IT de Valenciennes en alternance.<br></p>
-      <p style="font-size:15px; line-height:1.85; color:#CFC6DE; margin:0 0 16px;">Orienté sécurité cloud et opérations de sécurité (SecOps) : durcissement système, détection, remédiation.</p>
-      <p style="font-size:15px; line-height:1.85; color:#9A8FB0; margin:0;">Un profil technique construit expérience après expérience, autour de la protection continue des infrastructures.</p>
-    </div>
-  </div>
+        ::selection {
+          background: #EFE9F4;
+          color: #0B0712;
+        }
 
-  <div data-band="2" data-screen-label="Expérience Atos" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-end; pointer-events:none; padding:0 8vw; opacity:0;">
-    <div style="max-width:520px;">
-      <div style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">Expérience 01 / 04 · Sept 2026 → en cours</div>
-      <h3 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">Alternance Cloud Security</h3>
-      <div style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">Atos / Eviden — Lille</div>
-      <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Montée en compétences cloud security sur environnement Google Cloud</li>
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Certifications Google Cloud en parcours e-learning intégré (Atos/Eviden, Google Cloud Premier Partner)</li>
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Rythme 2 j remote / 3&nbsp;j sur site</li>
-      </ul>
-    </div>
-  </div>
+        @keyframes ewblink {
 
-  <div data-band="3" data-screen-label="Expérience Vallée Dorée" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-start; pointer-events:none; padding:0 8vw; opacity:0;">
-    <div style="max-width:520px;">
-      <div style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">Expérience 02 / 04 · Mars → Juin 2026</div>
-      <h3 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">Stage Réseaux</h3>
-      <div style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">La Vallée Dorée — Laigneville</div>
-      <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Déploiement de correctifs CVE</li>
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Développement d'outils internes de sécurisation</li>
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Support infrastructure réseau</li>
-      </ul>
-    </div>
-  </div>
+          0%,
+          100% {
+            opacity: 1;
+          }
 
-  <div data-band="4" data-screen-label="Expérience GIMA" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-end; pointer-events:none; padding:0 8vw; opacity:0;">
-    <div style="max-width:520px;">
-      <div style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">Expérience 03 / 04 · Jan → Mars 2025</div>
-      <h3 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">Stage Cybersécurité</h3>
-      <div style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">GIMA — Beauvais</div>
-      <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Supervision SOC et traitement d'incidents — Trend Micro, GLPI</li>
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Audit de vulnérabilités</li>
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Administration AD / Entra ID / Intune</li>
-      </ul>
-    </div>
-  </div>
+          50% {
+            opacity: 0.15;
+          }
+        }
 
-  <div data-band="5" data-screen-label="Expérience SAGEB" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-start; pointer-events:none; padding:0 8vw; opacity:0;">
-    <div style="max-width:520px;">
-      <div style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">Expérience 04 / 04 · Août 2023 &amp; 2024</div>
-      <h3 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">Administrateur Cybersécurité</h3>
-      <div style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">SAGEB — Beauvais-Tillé</div>
-      <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Hardening Ubuntu — auditd, rsyslog, Fail2ban</li>
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Automatisation Bash</li>
-        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Dashboards KPI Power BI</li>
-      </ul>
-    </div>
-  </div>
+        .snap-point {
+          position: absolute;
+          left: 0;
+          width: 1px;
+          height: 1px;
+          scroll-snap-align: start;
+          pointer-events: none;
+        }
+      </style>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
+    </helmet>
+    <div ref="{{ rootRef }}"
+      style="background:#0B0712; color:#EFE9F4; font-family:'JetBrains Mono', monospace; min-height:100vh;">
 
-  <div data-band="6" data-screen-label="Compétences" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; pointer-events:none; padding:0 6vw; opacity:0;">
-    <div style="max-width:880px; width:100%;">
-      <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:14px; text-align:center;">02 — Compétences</div>
-      <h2 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,4vw,52px); margin:0 0 40px; color:#EFE9F4; text-align:center;">Compétences</h2>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
-        <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
-          <div style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">Systèmes &amp; Réseaux</div>
-          <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Linux · Windows · AD<br>TCP/IP · DNS · DHCP</div>
-        </div>
-        <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
-          <div style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">Cybersécurité</div>
-          <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Hardening · Audit de vulnérabilités<br>Supervision SOC · Remédiation</div>
-        </div>
-        <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
-          <div style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">Cloud</div>
-          <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Google Cloud (certification en cours)<br>Entra ID · Intune</div>
-        </div>
-        <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
-          <div style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">Outils</div>
-          <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Bash · Wireshark · Fail2ban<br>Trend Micro · GLPI · Power BI</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div data-band="7" data-screen-label="Contact" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; pointer-events:none; padding:0 6vw; text-align:center; opacity:0;">
-    <div style="max-width:760px;">
-      <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500;">03 — Contact</div>
-      <h2 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(40px,6.5vw,84px); line-height:1; margin:22px 0 26px; color:#EFE9F4;">Discutons<br>cloud &amp; sécurité.</h2>
-      <p style="font-size:15px; line-height:1.8; color:#9A8FB0; margin:0 0 30px;">Disponible pour échanger — cloud security, SecOps, hardening.</p>
-
-      <div style="display:flex; flex-direction:column; gap:12px; max-width:420px; margin:0 auto 22px; pointer-events:auto;">
-        <input type="email" required="true" placeholder="Votre email" value="{{ contactEmail }}" onChange="{{ onEmailChange }}" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.04); border:1px solid rgba(216,213,222,0.28); color:#EFE9F4; font-family:'JetBrains Mono', monospace; font-size:13px; padding:13px 16px; outline:none;"/>
-        <textarea required="true" placeholder="Votre message" rows="4" value="{{ contactMsg }}" onChange="{{ onMsgChange }}" style="width:100%; box-sizing:border-box; resize:vertical; background:rgba(255,255,255,0.04); border:1px solid rgba(216,213,222,0.28); color:#EFE9F4; font-family:'JetBrains Mono', monospace; font-size:13px; padding:13px 16px; outline:none;"></textarea>
-        <button onClick="{{ onSubmit }}" disabled="{{ sending }}" style="align-self:center; margin-top:4px; background:transparent; border:1px solid rgba(255,255,255,0.5); color:#EFE9F4; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; padding:12px 30px; cursor:pointer;" style-hover="background:rgba(255,255,255,0.08); border-color:#FFFFFF;">{{ submitLabel }}</button>
-        <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
-          <div style="font-size:12px; letter-spacing:0.08em; color:#E8A15C; text-align:center;">{{ error }}</div>
-        </sc-if>
-        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-          <div style="font-size:12px; letter-spacing:0.08em; color:#9A8FB0; text-align:center;">Message envoyé — merci, réponse à venir.</div>
-        </sc-if>
+      <div ref="{{ glRef }}" style="position:fixed; inset:0; z-index:0;"></div>
+      <div
+        style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse at 50% 50%, rgba(11,7,18,0) 42%, rgba(11,7,18,0.78) 100%);">
       </div>
 
-      <div style="display:flex; gap:28px; justify-content:center; flex-wrap:wrap; font-size:13px; letter-spacing:0.14em; text-transform:uppercase;">
-        <a href="https://www.linkedin.com/in/Ewan-Le-Neillon" target="_blank" rel="noopener noreferrer" style="pointer-events:auto;">LinkedIn</a>
-        <a href="https://github.com/ewn0/" target="_blank" rel="noopener noreferrer" style="pointer-events:auto;">GitHub</a>
+      <div
+        style="position:fixed; top:0; left:0; right:0; z-index:5; display:flex; justify-content:space-between; align-items:center; padding:22px 32px; pointer-events:none; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9A8FB0;">
+        <div style="font-weight:700; color:#EFE9F4;">E.LN — 2026</div>
+        <div>Cloud Security · Atos / Eviden</div>
+      </div>
+
+      <div
+        style="position:fixed; bottom:0; left:0; right:0; z-index:5; display:flex; justify-content:space-between; align-items:flex-end; padding:22px 32px; pointer-events:none; font-size:11px; letter-spacing:0.24em; text-transform:uppercase;">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div data-hud="phase" style="color:#D8D5DE; font-weight:700;">SYSTÈME STABLE</div>
+          <div style="width:180px; height:2px; background:rgba(239,233,244,0.12);">
+            <div data-hud="bar" style="width:0%; height:100%; background:linear-gradient(90deg,#8A8593,#FFFFFF);"></div>
+          </div>
+        </div>
+        <div data-hud="hint" style="color:#9A8FB0; animation:ewblink 2.4s infinite;">Scroll ↓</div>
+      </div>
+
+      <div data-band="0" data-screen-label="Hero"
+        style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; pointer-events:none; padding:0 6vw; text-align:center;">
+        <div style="max-width:980px;">
+          <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500;">
+            Portfolio — Cybersécurité</div>
+          <h1
+            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(52px, 9.5vw, 128px); line-height:0.96; letter-spacing:-0.02em; margin:26px 0 30px; color:#EFE9F4; text-shadow:0 4px 60px rgba(11,7,18,0.9);">
+            Ewan<br>Le Neillon</h1>
+          <p
+            style="font-size:clamp(15px, 1.6vw, 19px); line-height:1.75; margin:0 auto 26px; max-width:620px; color:#CFC6DE;">
+            « Je surveille. Je détecte. Je sécurise. »</p>
+          <div style="font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:#9A8FB0;">Étudiant M1
+            Cybersécurité — École IT Valenciennes · Sécurité Cloud &amp; SecOps · Alternance sept. 2026</div>
+        </div>
+      </div>
+
+      <div data-band="1" data-screen-label="À propos"
+        style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-start; pointer-events:none; padding:0 8vw; opacity:0;">
+        <div style="max-width:540px;">
+          <div
+            style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:18px;">
+            01 — À propos</div>
+          <h2
+            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(34px,4.4vw,58px); line-height:1.04; margin:0 0 24px; color:#EFE9F4;">
+            Superviser le cloud.<br><span style="color:#FFFFFF;">Le garder stable.</span></h2>
+          <p style="font-size:15px; line-height:1.85; color:#CFC6DE; margin:0 0 16px;">Étudiant en Master 1
+            Cybersécurité à l'École IT de Valenciennes en alternance.<br></p>
+          <p style="font-size:15px; line-height:1.85; color:#CFC6DE; margin:0 0 16px;">Orienté sécurité cloud et
+            opérations de sécurité (SecOps) : durcissement système, détection, remédiation.</p>
+          <p style="font-size:15px; line-height:1.85; color:#9A8FB0; margin:0;">Un profil technique construit expérience
+            après expérience, autour de la protection continue des infrastructures.</p>
+        </div>
+      </div>
+
+      <div data-band="2" data-screen-label="Expérience Atos"
+        style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-end; pointer-events:none; padding:0 8vw; opacity:0;">
+        <div style="max-width:520px;">
+          <div
+            style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">
+            Expérience 01 / 04 · Sept 2026 → en cours</div>
+          <h3
+            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">
+            Alternance Cloud Security</h3>
+          <div
+            style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">
+            Atos / Eviden — Lille</div>
+          <ul
+            style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Montée en compétences cloud
+              security sur environnement Google Cloud</li>
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Certifications Google Cloud en
+              parcours e-learning intégré (Atos/Eviden, Google Cloud Premier Partner)</li>
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Rythme 2 j remote / 3&nbsp;j
+              sur site</li>
+          </ul>
+        </div>
+      </div>
+
+      <div data-band="3" data-screen-label="Expérience Vallée Dorée"
+        style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-start; pointer-events:none; padding:0 8vw; opacity:0;">
+        <div style="max-width:520px;">
+          <div
+            style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">
+            Expérience 02 / 04 · Mars → Juin 2026</div>
+          <h3
+            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">
+            Stage Réseaux</h3>
+          <div
+            style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">
+            La Vallée Dorée — Laigneville</div>
+          <ul
+            style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Déploiement de correctifs CVE
+            </li>
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Développement d'outils internes
+              de sécurisation</li>
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Support infrastructure réseau
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div data-band="4" data-screen-label="Expérience GIMA"
+        style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-end; pointer-events:none; padding:0 8vw; opacity:0;">
+        <div style="max-width:520px;">
+          <div
+            style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">
+            Expérience 03 / 04 · Jan → Mars 2025</div>
+          <h3
+            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">
+            Stage Cybersécurité</h3>
+          <div
+            style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">
+            GIMA — Beauvais</div>
+          <ul
+            style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Supervision SOC et traitement
+              d'incidents — Trend Micro, GLPI</li>
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Audit de vulnérabilités</li>
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Administration AD / Entra ID /
+              Intune</li>
+          </ul>
+        </div>
+      </div>
+
+      <div data-band="5" data-screen-label="Expérience SAGEB"
+        style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-start; pointer-events:none; padding:0 8vw; opacity:0;">
+        <div style="max-width:520px;">
+          <div
+            style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">
+            Expérience 04 / 04 · Août 2023 &amp; 2024</div>
+          <h3
+            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">
+            Administrateur Cybersécurité</h3>
+          <div
+            style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">
+            SAGEB — Beauvais-Tillé</div>
+          <ul
+            style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Hardening Ubuntu — auditd,
+              rsyslog, Fail2ban</li>
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Automatisation Bash</li>
+            <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Dashboards KPI Power BI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div data-band="6" data-screen-label="Compétences"
+        style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; pointer-events:none; padding:0 6vw; opacity:0;">
+        <div style="max-width:880px; width:100%;">
+          <div
+            style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:14px; text-align:center;">
+            02 — Compétences</div>
+          <h2
+            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,4vw,52px); margin:0 0 40px; color:#EFE9F4; text-align:center;">
+            Compétences</h2>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
+            <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
+              <div
+                style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">
+                Systèmes &amp; Réseaux</div>
+              <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Linux · Windows · AD<br>TCP/IP · DNS · DHCP
+              </div>
+            </div>
+            <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
+              <div
+                style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">
+                Cybersécurité</div>
+              <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Hardening · Audit de
+                vulnérabilités<br>Supervision SOC · Remédiation</div>
+            </div>
+            <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
+              <div
+                style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">
+                Cloud</div>
+              <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Google Cloud (certification en
+                cours)<br>Entra ID · Intune</div>
+            </div>
+            <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
+              <div
+                style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">
+                Outils</div>
+              <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Bash · Wireshark · Fail2ban<br>Trend Micro ·
+                GLPI · Power BI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-band="7" data-screen-label="Contact"
+        style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; pointer-events:none; padding:0 6vw; text-align:center; opacity:0;">
+        <div style="max-width:760px;">
+          <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500;">
+            03 — Contact</div>
+          <h2
+            style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(40px,6.5vw,84px); line-height:1; margin:22px 0 26px; color:#EFE9F4;">
+            Discutons<br>cloud &amp; sécurité.</h2>
+          <p style="font-size:15px; line-height:1.8; color:#9A8FB0; margin:0 0 30px;">Disponible pour échanger — cloud
+            security, SecOps, hardening.</p>
+
+          <div
+            style="display:flex; flex-direction:column; gap:12px; max-width:420px; margin:0 auto 22px; pointer-events:auto;">
+            <input type="email" required="true" placeholder="Votre email" value="{{ contactEmail }}"
+              onChange="{{ onEmailChange }}"
+              style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.04); border:1px solid rgba(216,213,222,0.28); color:#EFE9F4; font-family:'JetBrains Mono', monospace; font-size:13px; padding:13px 16px; outline:none;" />
+            <textarea required="true" placeholder="Votre message" rows="4" value="{{ contactMsg }}"
+              onChange="{{ onMsgChange }}"
+              style="width:100%; box-sizing:border-box; resize:vertical; background:rgba(255,255,255,0.04); border:1px solid rgba(216,213,222,0.28); color:#EFE9F4; font-family:'JetBrains Mono', monospace; font-size:13px; padding:13px 16px; outline:none;"></textarea>
+            <button onClick="{{ onSubmit }}" disabled="{{ sending }}"
+              style="align-self:center; margin-top:4px; background:transparent; border:1px solid rgba(255,255,255,0.5); color:#EFE9F4; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; padding:12px 30px; cursor:pointer;"
+              style-hover="background:rgba(255,255,255,0.08); border-color:#FFFFFF;">{{ submitLabel }}</button>
+            <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12px; letter-spacing:0.08em; color:#E8A15C; text-align:center;">{{ error }}</div>
+            </sc-if>
+            <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12px; letter-spacing:0.08em; color:#9A8FB0; text-align:center;">Message envoyé —
+                merci, réponse à venir.</div>
+            </sc-if>
+          </div>
+
+          <div
+            style="display:flex; gap:28px; justify-content:center; flex-wrap:wrap; font-size:13px; letter-spacing:0.14em; text-transform:uppercase;">
+            <a href="https://www.linkedin.com/in/Ewan-Le-Neillon" target="_blank" rel="noopener noreferrer"
+              style="pointer-events:auto;">LinkedIn</a>
+            <a href="https://github.com/ewn0/" target="_blank" rel="noopener noreferrer"
+              style="pointer-events:auto;">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:relative; height:1050vh; pointer-events:none;">
+        <div class="snap-point" style="top:0;"></div>
+        <div class="snap-point" style="top:178.125vh;"></div>
+        <div class="snap-point" style="top:296.875vh;"></div>
+        <div class="snap-point" style="top:415.625vh;"></div>
+        <div class="snap-point" style="top:534.375vh;"></div>
+        <div class="snap-point" style="top:653.125vh;"></div>
+        <div class="snap-point" style="top:771.875vh;"></div>
+        <div class="snap-point" style="top:950vh;"></div>
       </div>
     </div>
-  </div>
-
-  <div style="position:relative; height:1050vh; pointer-events:none;">
-    <div class="snap-point" style="top:0;"></div>
-    <div class="snap-point" style="top:178.125vh;"></div>
-    <div class="snap-point" style="top:296.875vh;"></div>
-    <div class="snap-point" style="top:415.625vh;"></div>
-    <div class="snap-point" style="top:534.375vh;"></div>
-    <div class="snap-point" style="top:653.125vh;"></div>
-    <div class="snap-point" style="top:771.875vh;"></div>
-    <div class="snap-point" style="top:950vh;"></div>
-  </div>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{
+  </x-dc>
+  <script type="text/x-dc" data-dc-script data-props="{
   &quot;stableColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#D8D5DE&quot;, &quot;options&quot;: [&quot;#D8D5DE&quot;, &quot;#C4C0CC&quot;, &quot;#E8E6EC&quot;, &quot;#B0ADB8&quot;], &quot;section&quot;: &quot;Palette&quot; },
   &quot;alertColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#FFFFFF&quot;, &quot;options&quot;: [&quot;#FFFFFF&quot;, &quot;#F4F2F6&quot;, &quot;#EDEAF0&quot;, &quot;#DCD9E2&quot;], &quot;section&quot;: &quot;Palette&quot; },
   &quot;motionIntensity&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0.2, &quot;max&quot;: 2, &quot;step&quot;: 0.1, &quot;section&quot;: &quot;Scène&quot; }
@@ -639,4 +775,5 @@ class Component extends DCLogic {
 }
 </script>
 </body>
+
 </html>
