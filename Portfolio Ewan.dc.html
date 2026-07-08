@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+html, body { margin:0; padding:0; background:#0B0712; }
+body { overscroll-behavior:none; }
+a { color:#EFE9F4; text-decoration:none; border-bottom:1px solid rgba(239,233,244,0.35); transition:color .2s, border-color .2s; }
+a:hover { color:#FFFFFF; border-color:rgba(255,255,255,0.7); }
+::selection { background:#EFE9F4; color:#0B0712; }
+@keyframes ewblink { 0%,100% { opacity:1; } 50% { opacity:0.15; } }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
+</helmet>
+<div ref="{{ rootRef }}" style="background:#0B0712; color:#EFE9F4; font-family:'JetBrains Mono', monospace; min-height:100vh;">
+
+  <div ref="{{ glRef }}" style="position:fixed; inset:0; z-index:0;"></div>
+  <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse at 50% 50%, rgba(11,7,18,0) 42%, rgba(11,7,18,0.78) 100%);"></div>
+
+  <div style="position:fixed; top:0; left:0; right:0; z-index:5; display:flex; justify-content:space-between; align-items:center; padding:22px 32px; pointer-events:none; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9A8FB0;">
+    <div style="font-weight:700; color:#EFE9F4;">E.LN — 2026</div>
+    <div>Cloud Security · Atos / Eviden</div>
+  </div>
+
+  <div style="position:fixed; bottom:0; left:0; right:0; z-index:5; display:flex; justify-content:space-between; align-items:flex-end; padding:22px 32px; pointer-events:none; font-size:11px; letter-spacing:0.24em; text-transform:uppercase;">
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div data-hud="phase" style="color:#D8D5DE; font-weight:700;">SYSTÈME STABLE</div>
+      <div style="width:180px; height:2px; background:rgba(239,233,244,0.12);">
+        <div data-hud="bar" style="width:0%; height:100%; background:linear-gradient(90deg,#8A8593,#FFFFFF);"></div>
+      </div>
+    </div>
+    <div data-hud="hint" style="color:#9A8FB0; animation:ewblink 2.4s infinite;">Scroll ↓</div>
+  </div>
+
+  <div data-band="0" data-screen-label="Hero" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; pointer-events:none; padding:0 6vw; text-align:center;">
+    <div style="max-width:980px;">
+      <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500;">Portfolio — Cybersécurité</div>
+      <h1 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(52px, 9.5vw, 128px); line-height:0.96; letter-spacing:-0.02em; margin:26px 0 30px; color:#EFE9F4; text-shadow:0 4px 60px rgba(11,7,18,0.9);">Ewan<br>Le Neillon</h1>
+      <p style="font-size:clamp(15px, 1.6vw, 19px); line-height:1.75; margin:0 auto 26px; max-width:620px; color:#CFC6DE;">« Je surveille. Je détecte. Je sécurise. »</p>
+      <div style="font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:#9A8FB0;">Étudiant M1 Cybersécurité — École IT Valenciennes · Sécurité Cloud &amp; SecOps · Alternance sept. 2026</div>
+    </div>
+  </div>
+
+  <div data-band="1" data-screen-label="À propos" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-start; pointer-events:none; padding:0 8vw; opacity:0;">
+    <div style="max-width:540px;">
+      <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:18px;">01 — À propos</div>
+      <h2 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(34px,4.4vw,58px); line-height:1.04; margin:0 0 24px; color:#EFE9F4;">Superviser le cloud.<br><span style="color:#FFFFFF;">Le garder stable.</span></h2>
+      <p style="font-size:15px; line-height:1.85; color:#CFC6DE; margin:0 0 16px;">Étudiant en Master 1 Cybersécurité à l'École IT de Valenciennes en alternance.<br></p>
+      <p style="font-size:15px; line-height:1.85; color:#CFC6DE; margin:0 0 16px;">Orienté sécurité cloud et opérations de sécurité (SecOps) : durcissement système, détection, remédiation.</p>
+      <p style="font-size:15px; line-height:1.85; color:#9A8FB0; margin:0;">Un profil technique construit expérience après expérience, autour de la protection continue des infrastructures.</p>
+    </div>
+  </div>
+
+  <div data-band="2" data-screen-label="Expérience Atos" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-end; pointer-events:none; padding:0 8vw; opacity:0;">
+    <div style="max-width:520px;">
+      <div style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">Expérience 01 / 04 · Sept 2026 → en cours</div>
+      <h3 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">Alternance Cloud Security</h3>
+      <div style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">Atos / Eviden — Lille</div>
+      <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Montée en compétences cloud security sur environnement Google Cloud</li>
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Certifications Google Cloud en parcours e-learning intégré (Atos/Eviden, Google Cloud Premier Partner)</li>
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Rythme 2 j remote / 3&nbsp;j sur site</li>
+      </ul>
+    </div>
+  </div>
+
+  <div data-band="3" data-screen-label="Expérience Vallée Dorée" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-start; pointer-events:none; padding:0 8vw; opacity:0;">
+    <div style="max-width:520px;">
+      <div style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">Expérience 02 / 04 · Mars → Juin 2026</div>
+      <h3 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">Stage Réseaux</h3>
+      <div style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">La Vallée Dorée — Laigneville</div>
+      <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Déploiement de correctifs CVE</li>
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Développement d'outils internes de sécurisation</li>
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Support infrastructure réseau</li>
+      </ul>
+    </div>
+  </div>
+
+  <div data-band="4" data-screen-label="Expérience GIMA" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-end; pointer-events:none; padding:0 8vw; opacity:0;">
+    <div style="max-width:520px;">
+      <div style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">Expérience 03 / 04 · Jan → Mars 2025</div>
+      <h3 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">Stage Cybersécurité</h3>
+      <div style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">GIMA — Beauvais</div>
+      <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Supervision SOC et traitement d'incidents — Trend Micro, GLPI</li>
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Audit de vulnérabilités</li>
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Administration AD / Entra ID / Intune</li>
+      </ul>
+    </div>
+  </div>
+
+  <div data-band="5" data-screen-label="Expérience SAGEB" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:flex-start; pointer-events:none; padding:0 8vw; opacity:0;">
+    <div style="max-width:520px;">
+      <div style="font-size:12px; letter-spacing:0.32em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:16px;">Expérience 04 / 04 · Août 2023 &amp; 2024</div>
+      <h3 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,44px); line-height:1.05; margin:0 0 8px; color:#EFE9F4;">Administrateur Cybersécurité</h3>
+      <div style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#9A8FB0; margin-bottom:22px;">SAGEB — Beauvais-Tillé</div>
+      <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:#CFC6DE;">
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Hardening Ubuntu — auditd, rsyslog, Fail2ban</li>
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Automatisation Bash</li>
+        <li style="border-left:1px solid rgba(216,213,222,0.35); padding-left:16px;">Dashboards KPI Power BI</li>
+      </ul>
+    </div>
+  </div>
+
+  <div data-band="6" data-screen-label="Compétences" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; pointer-events:none; padding:0 6vw; opacity:0;">
+    <div style="max-width:880px; width:100%;">
+      <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500; margin-bottom:14px; text-align:center;">02 — Compétences</div>
+      <h2 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,4vw,52px); margin:0 0 40px; color:#EFE9F4; text-align:center;">Compétences</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
+        <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
+          <div style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">Systèmes &amp; Réseaux</div>
+          <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Linux · Windows · AD<br>TCP/IP · DNS · DHCP</div>
+        </div>
+        <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
+          <div style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">Cybersécurité</div>
+          <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Hardening · Audit de vulnérabilités<br>Supervision SOC · Remédiation</div>
+        </div>
+        <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
+          <div style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">Cloud</div>
+          <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Google Cloud (certification en cours)<br>Entra ID · Intune</div>
+        </div>
+        <div style="border:1px solid rgba(216,213,222,0.2); background:rgba(11,7,18,0.55); padding:22px 20px;">
+          <div style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#D8D5DE; margin-bottom:14px;">Outils</div>
+          <div style="font-size:13.5px; line-height:2; color:#CFC6DE;">Bash · Wireshark · Fail2ban<br>Trend Micro · GLPI · Power BI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-band="7" data-screen-label="Contact" style="position:fixed; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; pointer-events:none; padding:0 6vw; text-align:center; opacity:0;">
+    <div style="max-width:760px;">
+      <div style="font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:#9A8FB0; font-weight:500;">03 — Contact</div>
+      <h2 style="font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(40px,6.5vw,84px); line-height:1; margin:22px 0 26px; color:#EFE9F4;">Discutons<br>cloud &amp; sécurité.</h2>
+      <p style="font-size:15px; line-height:1.8; color:#9A8FB0; margin:0 0 30px;">Disponible pour échanger — cloud security, SecOps, hardening.</p>
+
+      <div style="display:flex; flex-direction:column; gap:12px; max-width:420px; margin:0 auto 22px; pointer-events:auto;">
+        <input type="email" required="true" placeholder="Votre email" value="{{ contactEmail }}" onChange="{{ onEmailChange }}" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.04); border:1px solid rgba(216,213,222,0.28); color:#EFE9F4; font-family:'JetBrains Mono', monospace; font-size:13px; padding:13px 16px; outline:none;"/>
+        <textarea required="true" placeholder="Votre message" rows="4" value="{{ contactMsg }}" onChange="{{ onMsgChange }}" style="width:100%; box-sizing:border-box; resize:vertical; background:rgba(255,255,255,0.04); border:1px solid rgba(216,213,222,0.28); color:#EFE9F4; font-family:'JetBrains Mono', monospace; font-size:13px; padding:13px 16px; outline:none;"></textarea>
+        <button onClick="{{ onSubmit }}" disabled="{{ sending }}" style="align-self:center; margin-top:4px; background:transparent; border:1px solid rgba(255,255,255,0.5); color:#EFE9F4; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; padding:12px 30px; cursor:pointer;" style-hover="background:rgba(255,255,255,0.08); border-color:#FFFFFF;">{{ submitLabel }}</button>
+        <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:12px; letter-spacing:0.08em; color:#E8A15C; text-align:center;">{{ error }}</div>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:12px; letter-spacing:0.08em; color:#9A8FB0; text-align:center;">Message envoyé — merci, réponse à venir.</div>
+        </sc-if>
+      </div>
+
+      <div style="display:flex; gap:28px; justify-content:center; flex-wrap:wrap; font-size:13px; letter-spacing:0.14em; text-transform:uppercase;">
+        <a href="https://www.linkedin.com/in/Ewan-Le-Neillon" target="_blank" rel="noopener noreferrer" style="pointer-events:auto;">LinkedIn</a>
+        <a href="https://github.com/ewn0/" target="_blank" rel="noopener noreferrer" style="pointer-events:auto;">GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:1050vh;"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;stableColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#D8D5DE&quot;, &quot;options&quot;: [&quot;#D8D5DE&quot;, &quot;#C4C0CC&quot;, &quot;#E8E6EC&quot;, &quot;#B0ADB8&quot;], &quot;section&quot;: &quot;Palette&quot; },
+  &quot;alertColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#FFFFFF&quot;, &quot;options&quot;: [&quot;#FFFFFF&quot;, &quot;#F4F2F6&quot;, &quot;#EDEAF0&quot;, &quot;#DCD9E2&quot;], &quot;section&quot;: &quot;Palette&quot; },
+  &quot;motionIntensity&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0.2, &quot;max&quot;: 2, &quot;step&quot;: 0.1, &quot;section&quot;: &quot;Scène&quot; }
+}">
+class Component extends DCLogic {
+  state = { contactEmail: '', contactMsg: '', sent: false, sending: false, error: '' };
+
+  // Clé publique Web3Forms (web3forms.com) — liée côté serveur à l'adresse de réception,
+  // jamais l'adresse elle-même n'apparaît dans ce fichier.
+  WEB3FORMS_ACCESS_KEY = 'c8b2f3f9-0778-41ce-82c6-3903fc42e5be';
+
+  renderVals() {
+    if (!this.rootRef) { this.rootRef = React.createRef(); this.glRef = React.createRef(); }
+    const submitLabel = this.state.sending ? 'Envoi…' : 'Envoyer un message';
+    return {
+      rootRef: this.rootRef, glRef: this.glRef,
+      contactEmail: this.state.contactEmail,
+      contactMsg: this.state.contactMsg,
+      sent: this.state.sent,
+      sending: this.state.sending,
+      error: this.state.error,
+      submitLabel,
+      onEmailChange: (e) => this.setState({ contactEmail: e.target.value, error: '' }),
+      onMsgChange: (e) => this.setState({ contactMsg: e.target.value, error: '' }),
+      onSubmit: () => this.handleSubmit()
+    };
+  }
+
+  isValidEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  async handleSubmit() {
+    if (this.state.sending) return;
+    const from = (this.state.contactEmail || '').trim();
+    const msg = (this.state.contactMsg || '').trim();
+    if (!from || !this.isValidEmail(from)) {
+      this.setState({ error: 'Adresse email invalide.' });
+      return;
+    }
+    if (!msg) {
+      this.setState({ error: 'Le message est vide.' });
+      return;
+    }
+    this.setState({ sending: true, error: '' });
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: this.WEB3FORMS_ACCESS_KEY,
+          subject: 'Contact portfolio — ' + from,
+          from_email: from,
+          message: msg
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        this.setState({ sending: false, sent: true, contactEmail: '', contactMsg: '' });
+      } else {
+        this.setState({ sending: false, error: "Échec de l'envoi, réessaie." });
+      }
+    } catch (e) {
+      this.setState({ sending: false, error: 'Connexion impossible, réessaie.' });
+    }
+  }
+
+  componentDidMount() {
+    this.dead = false;
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.mx = 0; this.my = 0; this.smx = 0; this.smy = 0;
+    this.sp = 0;
+    this.boot();
+  }
+
+  boot() {
+    if (this.dead) return;
+    if (!window.THREE || !this.glRef.current) { setTimeout(() => this.boot(), 60); return; }
+    this.initThree();
+    this.onMove = (e) => {
+      this.mx = (e.clientX / window.innerWidth) * 2 - 1;
+      this.my = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+    this.onResize = () => {
+      const w = window.innerWidth, h = window.innerHeight;
+      this.camera.aspect = w / h; this.camera.updateProjectionMatrix();
+      this.renderer.setSize(w, h);
+    };
+    window.addEventListener('mousemove', this.onMove, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    this.t0 = performance.now();
+    this.raf = requestAnimationFrame((n) => this.tick(n));
+  }
+
+  componentWillUnmount() {
+    this.dead = true;
+    cancelAnimationFrame(this.raf);
+    window.removeEventListener('mousemove', this.onMove);
+    window.removeEventListener('resize', this.onResize);
+    if (this.renderer) { this.renderer.dispose(); }
+  }
+
+  initThree() {
+    const THREE = window.THREE;
+    const mobile = window.innerWidth < 768;
+    const w = window.innerWidth, h = window.innerHeight;
+
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 100);
+    this.renderer = new THREE.WebGLRenderer({ antialias: !mobile, powerPreference: 'high-performance' });
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2));
+    this.renderer.setSize(w, h);
+    this.renderer.setClearColor(0x0B0712, 1);
+    this.glRef.current.appendChild(this.renderer.domElement);
+
+    this.colA = new THREE.Color('#D8D5DE'); // stable / operational glow
+    this.colB = new THREE.Color('#FFFFFF'); // detection / remediation flash
+
+    const NOISE = `
+      vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
+      vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
+      vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
+      vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+      float snoise(vec3 v){
+        const vec2 C=vec2(1.0/6.0,1.0/3.0); const vec4 D=vec4(0.0,0.5,1.0,2.0);
+        vec3 i=floor(v+dot(v,C.yyy)); vec3 x0=v-i+dot(i,C.xxx);
+        vec3 g=step(x0.yzx,x0.xyz); vec3 l=1.0-g; vec3 i1=min(g.xyz,l.zxy); vec3 i2=max(g.xyz,l.zxy);
+        vec3 x1=x0-i1+C.xxx; vec3 x2=x0-i2+C.yyy; vec3 x3=x0-D.yyy;
+        i=mod289(i);
+        vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
+        float n_=0.142857142857; vec3 ns=n_*D.wyz-D.xzx;
+        vec4 j=p-49.0*floor(p*ns.z*ns.z);
+        vec4 x_=floor(j*ns.z); vec4 y_=floor(j-7.0*x_);
+        vec4 x=x_*ns.x+ns.yyyy; vec4 y=y_*ns.x+ns.yyyy; vec4 hh=1.0-abs(x)-abs(y);
+        vec4 b0=vec4(x.xy,y.xy); vec4 b1=vec4(x.zw,y.zw);
+        vec4 s0=floor(b0)*2.0+1.0; vec4 s1=floor(b1)*2.0+1.0; vec4 sh=-step(hh,vec4(0.0));
+        vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy; vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+        vec3 p0=vec3(a0.xy,hh.x); vec3 p1=vec3(a0.zw,hh.y); vec3 p2=vec3(a1.xy,hh.z); vec3 p3=vec3(a1.zw,hh.w);
+        vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+        p0*=norm.x; p1*=norm.y; p2*=norm.z; p3*=norm.w;
+        vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0); m=m*m;
+        return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
+      }`;
+
+    // ---- Core: the living cloud infrastructure — a dense organic mass, continuously scanned
+    this.uCore = {
+      uTime: { value: 0 }, uAmp: { value: 0.24 },
+      uScanDir: { value: new THREE.Vector3(1, 0, 0) },
+      uColA: { value: this.colA.clone() }, uColB: { value: this.colB.clone() }
+    };
+    const core = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(1.55, mobile ? 4 : 5),
+      new THREE.ShaderMaterial({
+        uniforms: this.uCore,
+        vertexShader: NOISE + `
+          uniform float uTime; uniform float uAmp;
+          varying float vD; varying vec3 vN; varying vec3 vV; varying vec3 vLocalN;
+          void main(){
+            float n1 = snoise(normal*1.7 + vec3(0.0, uTime*0.16, uTime*0.1));
+            float n2 = snoise(normal*4.5 - uTime*0.22);
+            float d = n1*0.72 + n2*0.28;
+            vec3 p = position + normal * d * uAmp;
+            vD = d;
+            vLocalN = normalize(normal);
+            vec4 mv = modelViewMatrix * vec4(p, 1.0);
+            vN = normalize(normalMatrix * normal);
+            vV = -mv.xyz;
+            gl_Position = projectionMatrix * mv;
+          }`,
+        fragmentShader: `
+          uniform vec3 uColA; uniform vec3 uColB; uniform vec3 uScanDir;
+          varying float vD; varying vec3 vN; varying vec3 vV; varying vec3 vLocalN;
+          void main(){
+            float fres = pow(1.0 - abs(dot(normalize(vV), normalize(vN))), 2.4);
+            float veins = smoothstep(0.25, 0.95, vD);
+            float align = dot(normalize(vLocalN), normalize(uScanDir));
+            float scan = smoothstep(0.90, 0.995, align);
+            vec3 col = uColA * 0.06
+              + uColA * fres * 0.85
+              + uColA * veins * 0.4
+              + uColB * scan * 1.6;
+            gl_FragColor = vec4(col, 1.0);
+          }`
+      })
+    );
+    this.scene.add(core);
+    this.core = core;
+
+    // ---- Particle field: ambient telemetry, drifting, reacting to cursor + scan sweep
+    const COUNT = mobile ? 1800 : 5200;
+    const pos = new Float32Array(COUNT * 3);
+    const seed = new Float32Array(COUNT);
+    for (let i = 0; i < COUNT; i++) {
+      let r = 4 + Math.pow(Math.random(), 0.6) * 14;
+      const th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+      pos[i*3] = r * Math.sin(ph) * Math.cos(th);
+      pos[i*3+1] = r * Math.sin(ph) * Math.sin(th) * 0.75;
+      pos[i*3+2] = r * Math.cos(ph);
+      seed[i] = Math.random();
+    }
+    const pg = new THREE.BufferGeometry();
+    pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    pg.setAttribute('aSeed', new THREE.BufferAttribute(seed, 1));
+    this.uPts = {
+      uTime: { value: 0 }, uPR: { value: this.renderer.getPixelRatio() },
+      uMouse: { value: new THREE.Vector3(999, 999, 999) },
+      uScanDir: { value: new THREE.Vector3(1, 0, 0) },
+      uColA: { value: this.colA.clone() }, uColB: { value: this.colB.clone() }
+    };
+    const pts = new THREE.Points(pg, new THREE.ShaderMaterial({
+      uniforms: this.uPts,
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      vertexShader: `
+        attribute float aSeed;
+        uniform float uTime; uniform float uPR; uniform vec3 uMouse; uniform vec3 uScanDir;
+        varying float vSeed; varying float vFade; varying float vGlow;
+        void main(){
+          vec3 p = position;
+          p.x += sin(uTime*0.22 + aSeed*17.0 + p.y*0.4) * 0.7;
+          p.y += cos(uTime*0.18 + aSeed*23.0 + p.x*0.3) * 0.55;
+          p.z += sin(uTime*0.15 + aSeed*31.0) * 0.7;
+          vec3 d = p - uMouse; float dist = length(d);
+          float rep = smoothstep(3.0, 0.0, dist);
+          p += (d / max(dist, 0.001)) * rep * 1.6;
+          float align = dot(normalize(position), normalize(uScanDir));
+          vGlow = smoothstep(0.92, 0.995, align);
+          vSeed = aSeed;
+          vec4 mv = modelViewMatrix * vec4(p, 1.0);
+          float sz = (2.2 + aSeed*4.0) * uPR * (10.0 / max(-mv.z, 1.0));
+          gl_PointSize = clamp(sz, 1.0, 14.0);
+          vFade = smoothstep(28.0, 6.0, -mv.z);
+          gl_Position = projectionMatrix * mv;
+        }`,
+      fragmentShader: `
+        uniform vec3 uColA; uniform vec3 uColB;
+        varying float vSeed; varying float vFade; varying float vGlow;
+        void main(){
+          float d = length(gl_PointCoord - 0.5);
+          float a = smoothstep(0.5, 0.12, d) * (0.32 + vSeed*0.45) * vFade;
+          vec3 col = mix(uColA, uColB, vGlow);
+          gl_FragColor = vec4(col, a * (1.0 + vGlow*1.4));
+        }`
+    }));
+    this.scene.add(pts);
+
+    // ---- Hardening plates: a stable segmented shell, gently breathing, never scattering
+    const PC = mobile ? 130 : 260;
+    this.plates = new THREE.InstancedMesh(
+      new THREE.PlaneGeometry(0.36, 0.22),
+      new THREE.MeshBasicMaterial({ color: this.colA, transparent: true, opacity: 0.28, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false }),
+      PC
+    );
+    this.plateData = [];
+    for (let i = 0; i < PC; i++) {
+      const th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+      this.plateData.push({
+        dir: new THREE.Vector3(Math.sin(ph)*Math.cos(th), Math.sin(ph)*Math.sin(th), Math.cos(ph)),
+        r: 3.5 + Math.random() * 0.7, phase: Math.random() * Math.PI * 2, rz: Math.random() * Math.PI
+      });
+    }
+    this.scene.add(this.plates);
+    this.dummy = new THREE.Object3D();
+
+    // ---- Wireframe cage shells — the perimeter under continuous watch
+    this.shells = [];
+    [[3.0, 1, 0.15], [5.3, 2, 0.075]].forEach(([r, det, op]) => {
+      const ls = new THREE.LineSegments(
+        new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(r, det)),
+        new THREE.LineBasicMaterial({ color: this.colA, transparent: true, opacity: op })
+      );
+      this.scene.add(ls); this.shells.push(ls);
+    });
+
+    // ---- Supervision rings: thin scanning arcs sweeping continuously over the core
+    this.scanRings = [];
+    const ringGeo = new THREE.TorusGeometry(2.05, 0.01, 8, 128);
+    [[0.15, 0.0], [0.11, 2.1], [0.08, 4.2]].forEach(([speed, off]) => {
+      const m = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: this.colB, transparent: true, opacity: 0.45, blending: THREE.AdditiveBlending, depthWrite: false }));
+      m.userData.speed = speed; m.userData.off = off;
+      this.scene.add(m); this.scanRings.push(m);
+    });
+
+    // ---- Waypoint markers for the 4 experiences — stable operational nodes
+    this.markers = [];
+    this.mkPos = [];
+    for (let k = 0; k < 4; k++) {
+      const ang = 0.6 + k * 1.45;
+      const mp = new THREE.Vector3(Math.cos(ang) * 4.4, 1.4 - k * 0.95, Math.sin(ang) * 4.4);
+      this.mkPos.push({ ang, p: mp });
+      const mk = new THREE.Mesh(
+        new THREE.OctahedronGeometry(0.3, 0),
+        new THREE.MeshBasicMaterial({ color: this.colA, wireframe: true, transparent: true, opacity: 0.4 })
+      );
+      mk.position.copy(mp);
+      this.scene.add(mk); this.markers.push(mk);
+    }
+
+    // ---- Camera keyframes (8 bands -> 9 points)
+    const V = (x, y, z) => new THREE.Vector3(x, y, z);
+    const camExp = (k) => {
+      const a = this.mkPos[k].ang - 0.55, mp = this.mkPos[k].p;
+      return { p: V(Math.cos(a) * 7.2, mp.y + 0.9, Math.sin(a) * 7.2), l: mp.clone() };
+    };
+    this.KF = [
+      { p: V(0, 0.8, 15), l: V(0, 0, 0) },
+      { p: V(3.4, 1.7, 10.5), l: V(0, 0.4, 0) },
+      camExp(0), camExp(1), camExp(2), camExp(3),
+      { p: V(1.6, -2.4, 4.8), l: V(0, -0.3, 0) },
+      { p: V(0, -0.3, 3.5), l: V(0, 0, 0) },
+      { p: V(0, 0.1, 2.75), l: V(0, 0, 0) }
+    ];
+
+    this.raycaster = new THREE.Raycaster();
+    this.bands = Array.from(this.rootRef.current.querySelectorAll('[data-band]'));
+    this.hud = {};
+    this.rootRef.current.querySelectorAll('[data-hud]').forEach(el => { this.hud[el.getAttribute('data-hud')] = el; });
+    this.tmpA = new THREE.Color(); this.tmpB = new THREE.Color();
+    this.scanDirW = new THREE.Vector3();
+    this.scanDirLocal = new THREE.Vector3();
+    this.invQ = new THREE.Quaternion();
+  }
+
+  tick(now) {
+    if (this.dead) return;
+    this.raf = requestAnimationFrame((n) => this.tick(n));
+    const THREE = window.THREE;
+
+    const doc = document.documentElement;
+    const max = Math.max(doc.scrollHeight - window.innerHeight, 1);
+    const target = Math.min(Math.max(window.scrollY / max, 0), 1);
+    this.sp += (target - this.sp) * 0.07;
+    const p = this.sp;
+    const motion = Math.max(this.props.motionIntensity ?? 1, 0.05);
+    const t = this.reduced ? p * 14 : (now - this.t0) * 0.001 * motion;
+    const parallax = this.reduced ? 0 : 1;
+    this.smx += (this.mx - this.smx) * 0.06;
+    this.smy += (this.my - this.smy) * 0.06;
+
+    // live prop colors
+    this.tmpA.set(this.props.stableColor ?? '#D8D5DE');
+    this.tmpB.set(this.props.alertColor ?? '#FFFFFF');
+
+    // camera along keyframes — reveals content as points of interest, no threat escalation
+    const N = 8, u = Math.min(p * N, N - 0.0001);
+    const i = Math.floor(u), f = u - i, e = f * f * (3 - 2 * f);
+    const cp = this.KF[i].p.clone().lerp(this.KF[i + 1].p, e);
+    const cl = this.KF[i].l.clone().lerp(this.KF[i + 1].l, e);
+    cp.x += this.smx * 0.65 * parallax;
+    cp.y -= this.smy * 0.45 * parallax;
+    this.camera.position.copy(cp);
+    this.camera.lookAt(cl);
+
+    // mouse world point for particle repulsion
+    if (!this.reduced) {
+      this.raycaster.setFromCamera({ x: this.smx, y: -this.smy }, this.camera);
+      this.uPts.uMouse.value.copy(this.raycaster.ray.origin).addScaledVector(this.raycaster.ray.direction, 8);
+    }
+
+    // continuous supervision scan direction — cycles independent of scroll narrative
+    this.scanDirW.set(Math.cos(t * 0.15), Math.sin(t * 0.15 * 0.7), Math.sin(t * 0.15 * 1.3)).normalize();
+
+    // uniforms
+    this.uCore.uTime.value = t;
+    this.uCore.uAmp.value = (0.22 + Math.sin(t * 0.3) * 0.05) * motion;
+    this.uCore.uColA.value.copy(this.tmpA); this.uCore.uColB.value.copy(this.tmpB);
+    this.core.rotation.y = t * 0.045;
+    this.invQ.copy(this.core.quaternion).invert();
+    this.scanDirLocal.copy(this.scanDirW).applyQuaternion(this.invQ);
+    this.uCore.uScanDir.value.copy(this.scanDirLocal);
+
+    this.uPts.uTime.value = t;
+    this.uPts.uColA.value.copy(this.tmpA); this.uPts.uColB.value.copy(this.tmpB);
+    this.uPts.uScanDir.value.copy(this.scanDirW);
+
+    // hardening plates: steady breathing, no scatter, occasional amber flash from scan proximity
+    let maxProx = 0;
+    for (let k = 0; k < this.plateData.length; k++) {
+      const d = this.plateData[k];
+      const r = d.r + Math.sin(t * 0.9 + d.phase) * 0.12;
+      this.dummy.position.copy(d.dir).multiplyScalar(r);
+      this.dummy.lookAt(0, 0, 0);
+      this.dummy.rotation.z += d.rz;
+      this.dummy.updateMatrix();
+      this.plates.setMatrixAt(k, this.dummy.matrix);
+      const align = d.dir.dot(this.scanDirW);
+      const prox = Math.max(0, (align - 0.94) / 0.06);
+      if (prox > maxProx) maxProx = prox;
+    }
+    this.plates.instanceMatrix.needsUpdate = true;
+    this.plates.material.color.copy(this.tmpA).lerp(this.tmpB, Math.min(maxProx * 1.4, 0.6));
+    this.plates.material.opacity = 0.28 + maxProx * 0.3;
+
+    this.shells.forEach((s, k) => {
+      s.rotation.y = t * (0.018 + k * 0.012); s.rotation.x = t * 0.008;
+      s.material.color.copy(this.tmpA);
+    });
+
+    // scan rings sweep continuously
+    this.scanRings.forEach((r) => {
+      r.rotation.x = t * r.userData.speed + r.userData.off;
+      r.rotation.y = t * r.userData.speed * 0.6 + r.userData.off * 1.3;
+      r.material.color.copy(this.tmpB);
+      r.material.opacity = 0.32 + Math.sin(t * 0.8 + r.userData.off) * 0.14;
+    });
+
+    // markers pulse near their band — stable operational waypoints
+    this.markers.forEach((mk, k) => {
+      mk.rotation.y = t * 0.5; mk.rotation.x = t * 0.25;
+      const prox = Math.min(Math.max(1 - Math.abs(u - (k + 2.5)) * 1.2, 0), 1);
+      mk.material.opacity = 0.14 + prox * 0.7;
+      mk.material.color.copy(this.tmpA).lerp(this.tmpB, prox * 0.3);
+      const s = 1 + prox * 0.45 + Math.sin(t * 1.6 + k) * 0.05;
+      mk.scale.set(s, s, s);
+    });
+
+    // overlay bands
+    for (let k = 0; k < this.bands.length; k++) {
+      const c = k + 0.5;
+      let d;
+      if (k === 0) d = Math.max(u - c, 0); // hero stays fully visible from scroll top through its segment's center
+      else if (k === this.bands.length - 1) d = Math.max(c - u, 0); // final band holds visible through to page bottom
+      else d = Math.abs(u - c);
+      let v = Math.min(Math.max(1 - d * 1.9, 0), 1); v = v * v * (3 - 2 * v);
+      const el = this.bands[k];
+      el.style.opacity = v.toFixed(3);
+      el.style.visibility = v < 0.01 ? 'hidden' : 'visible';
+      el.style.transform = 'translateY(' + ((1 - v) * 36 * (u < c ? 1 : -1)).toFixed(1) + 'px)';
+    }
+
+    // HUD — continuous supervision status, not a two-mode narrative
+    if (this.hud.bar) this.hud.bar.style.width = (p * 100).toFixed(1) + '%';
+    if (this.hud.phase) {
+      const pulse = Math.pow(Math.sin(t * 0.6) * 0.5 + 0.5, 6);
+      const alert = pulse > 0.5;
+      const txt = alert ? 'ANOMALIE DÉTECTÉE → REMÉDIATION' : 'SYSTÈME STABLE';
+      if (this.hud.phase.textContent !== txt) this.hud.phase.textContent = txt;
+      this.hud.phase.style.color = alert ? '#' + this.tmpB.getHexString() : '#' + this.tmpA.getHexString();
+    }
+    if (this.hud.hint) this.hud.hint.style.opacity = p > 0.03 ? 0 : 1;
+
+    this.renderer.render(this.scene, this.camera);
+  }
+}
+</script>
+</body>
+</html>
